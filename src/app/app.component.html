@@ -1,0 +1,44 @@
+<h1> ARK BUS BOOKINGS</h1>
+<!-- <form #id = ngForm #v = ngForm (ngSubmit) = "getName(id.value,v.value)">
+ 
+  <label>First name:</label><br>
+  <input  type="text" ngModel name = "Name" ><br>
+  <label>last name:</label><br>
+  <input  type="text" ngModel name = "Name" ><br>
+ 
+  <button>submit</button> 
+ 
+  
+
+</form> -->
+
+<div>
+  <nav>
+    <ul>
+      <li>
+
+        <!-- Specifies where to display the linked URL. It is a name of, or keyword for, a browsing context: a tab, window, or <iframe>. The following keywords have special meanings:
+
+          _self: Load the URL into the same browsing context as the current one. This is the default behavior.
+          _blank: Load the URL into a new browsing context. This is usually a tab, but users can configure browsers to use new windows instead.
+          _parent: Load the URL into the parent browsing context of the current one. If there is no parent, this behaves the same way as _self.
+          _top: Load the URL into the top-level browsing context (that is, the "highest" browsing context that is an ancestor of the current one, and has no parent). If there is no parent, this behaves the same way as _self.
+          Note: When using target, consider adding rel="noreferrer" to avoid exploitation of the window.opener API.
+          
+          Note: Linking to another page using target="_blank" will run the new page on the same process as your page. If the new page is executing expensive JS, your page's performance may suffer. To avoid this use rel="noopener".
+           -->
+          
+
+        <a routerLinkAction = "active" target = "_self" routerLink="login">login</a>
+      </li>
+      <br>
+      <li>
+        <a routerLinkAction = "active" routerLink="Home">Book Ticket</a>
+        <button routerLinkAction = "active" routerLink="Search"> search</button>
+    </ul>
+
+  </nav>
+  <nav><router-outlet></router-outlet>
+  </nav>
+
+</div>

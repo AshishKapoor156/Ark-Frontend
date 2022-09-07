@@ -1,0 +1,60 @@
+<p>login works!</p>
+<h1>Login page </h1>
+<div>
+    <a class="circle-link" title="Animations" href="http://localhost:4200/Home" target="_blank" rel="noopener">
+        </a>
+</div>
+
+    <form [formGroup] = "UserDetails" (ngSubmit) = CallApi()>
+
+
+        <!-- <div class = "form-group" [ngClass] = "{'has-error' : UserDetails.get('UserName').errors &&
+         (UserDetails.get('UserName').touched || UserDetails.get('UserName').dirty)}"> -->
+
+            <label class = "col-sm-2 control-label" for = "username">User Name:</label>
+            <input type = "text" id = "username" formControlName = "UserName">
+
+            
+
+            <br><br>
+            <label for = "pwd">Enter Password:</label>
+            <input type = "text" id = "pwd" formControlName = "password">
+            <br><br>
+            <!-- <button type = "submit"  routerLinkAction = "active" routerLink="Search">Submit</button> -->
+            <button type = 'submit' routerLinkAction = "active" routerLink="./search-station/search-station.component"> search</button>
+
+            <!-- <form [formGroup]="UserDetails" (ngSubmit)="CallApi()">
+                <app-profile-form formControlName="UserName"></app-profile-form>
+                <app-password-form formControlName="password"></app-password-form>
+                <button>Sign Up</button>
+              </form> -->
+       
+        </form>
+
+        <form [formGroup] = "Customer" (ngSubmit) = CallApi() >
+            <div [ngClass]="{'has-error' : FormErrors.Customermobile}"> 
+                <br><label for = "Name">Phone: </label>
+                <input id = "Name" type = "text" formControlName = "Customermobile" (blur) = "ValidateValues(Customer)"  >
+                <span  *ngIf="FormErrors.Customermobile">
+                    <br>  {{FormErrors.Customermobile}}
+                </span>
+                </div>
+
+                <div formGroupName = "AdditionalCustomer">
+
+                    <div [ngClass]="{'has-error' : FormErrors.BusOperator}"> 
+                        <br>
+                    <label for = "BusOperator">BusOperator Name:</label>
+                    <input id ="BusOperator" type = "text" formControlName = "BusOperator" (blur) = "ValidateValues(Customer)">
+                    <span  *ngIf="FormErrors.BusOperator">
+                        <br>  {{FormErrors.BusOperator}}
+                    </span>
+                    </div>
+                </div>
+            </form>
+        <nav>
+            <button type = "submit"  routerLinkAction = "active" routerLink="Search">Submit</button>
+
+        </nav>
+        <nav><router-outlet></router-outlet>
+        </nav>

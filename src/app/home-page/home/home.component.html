@@ -1,0 +1,140 @@
+
+<h1>Booking Page</h1>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$("[type='number']").keypress(function (evt) {
+    evt.preventDefault();
+});
+
+  function myFunction() {
+      let inputF = document.getElementById("seatscount");
+        inputF.setAttribute('value', 'defaultValue');
+      var x = document.getElementById("myInput").value;
+      document.getElementById("noOfSeat").innerHTML = x;
+    }
+    </script>
+
+ <!-- call fun<input id = "Name" type = "text" (click) = "myFunction(1)" >
+get val<input id = "noOfSeat" type = "text">  -->
+
+<form [formGroup] = "Customer" (ngSubmit) = CallApi() >
+    <div>
+<div>
+
+    <br><label for ="ContactPreference" >Contact Preference :</label><br><br>
+<input id = "ContactPreference" type = "radio"  value = "Customermobile" formControlName = "ContactPreference" >Phone
+<input id = "ContactPreference" type = "radio"  value = "Customeremail" formControlName = "ContactPreference"  >Email
+</div>
+
+<div [ngClass]="{'has-error' : FormErrors.Customermobile}"> 
+<br><label for = "Name">Phone: </label>
+<input id = "Name" type = "text" formControlName = "Customermobile" (blur) = "ValidateValues(Customer)"  >
+<span  *ngIf="FormErrors.Customermobile">
+    <br>  {{FormErrors.Customermobile}}
+</span>
+</div>
+<br>
+<div [ngClass]="{'has-error' : FormErrors.Customeremail}"> 
+    <label for = "Email" >      Email: </label>
+    <input id = "Email" type = "text" formControlName = "Customeremail" (blur) = "ValidateValues(Customer)" >
+    <span  *ngIf="FormErrors.Customeremail">
+        <br>  {{FormErrors.Customeremail}}
+    </span>
+    </div>
+
+<div [ngClass]="{'has-error' : FormErrors.CityName}"> 
+    <br>
+<label for = "CityName">CityName:</label><br>
+<input id = "CityName" type = "text" formControlName = "CityName" (blur) = "ValidateValues(Customer)">
+<span  class="help-block" *ngIf="FormErrors.CityName">
+    <br>  {{FormErrors.CityName}}
+</span>
+</div>
+
+<div [ngClass]="{'has-error' : FormErrors.noOfSeat}"> 
+    <br>
+<label for = "noOfSeat">No. of Seats:</label><br>
+<input id = "noOfSeat" type = "number" formControlName = "noOfSeat" (blur) = "ValidateValues(Customer)" min="1" max="12" onKeyDown="return false"  >
+<!-- (click) = "AddDetails() 
+to disable writing on box onkeydown is uesd-->
+<span  *ngIf="FormErrors.noOfSeat">
+    <br>  {{FormErrors.noOfSeat}}
+</span>
+</div>
+
+<div [ngClass]="{'has-error' : FormErrors.BusType}"> 
+    <br>
+    <label for ="BusType" >Bus Type:</label>
+<input id = "BusType" type = "radio" value = "Sleeper" formControlName = "BusType" (blur) = "ValidateValues(Customer)">Sleeper
+<input id = "BusType" type = "radio" value = "Semi Sleeper" formControlName = "BusType">Semi Sleeper
+<input id = "BusType" type = "radio" value = "Sitting" formControlName = "BusType">Sitting
+<span  *ngIf="FormErrors.BusType">
+    <br>  {{FormErrors.BusType}}
+</span>
+</div>
+</div>
+<br>
+<div formGroupName = "AdditionalCustomer">
+
+    <div [ngClass]="{'has-error' : FormErrors.BusOperator}"> 
+        <br>
+    <label for = "BusOperator">BusOperator Name:</label>
+    <input id ="BusOperator" type = "text" formControlName = "BusOperator" (blur) = "ValidateValues(Customer)">
+    <span  *ngIf="FormErrors.BusOperator">
+        <br>  {{FormErrors.BusOperator}}
+    </span>
+    </div>
+
+    <div [ngClass]="{'has-error' : FormErrors.AdditionalCustomerName}"> 
+        <br>
+    <label for = "AdditionalCustomerName">Another customer:</label>
+    <input id ="AdditionalCustomerName" type = "text" formControlName = "AdditionalCustomerName" (blur) = "ValidateValues(Customer)">
+    <span  *ngIf="FormErrors.AdditionalCustomerName">
+        <br>   {{FormErrors.AdditionalCustomerName}}
+    </span>
+    </div>
+</div>
+     <!-- <div formArrayName = "CustomerDetails" *ngFor ="let CustomerDetails of Customer.get('CustomerDetails')['controls']">  -->
+        <div formArrayName = "CustomerDetails">  
+        <div *ngFor ="let CustomerDetails of AddDetail.controls ; let pointIndex=index" [formGroupName] = "pointIndex" >
+
+<hr *ngIf = "pointIndex>0">
+            <!-- <button type="button" id = "myInput" (click)="myFunction(pointIndex)" (click)="removeDetail(pointIndex)">Delete Selling Point</button> -->
+
+    <div [ngClass]="{'has-error' : FormErrors.CustomerName}">    
+        <br>
+        <!-- <label [attr.for] = "'Name'+pointIndex">Name:{{pointIndex+1}}</label><br>
+    <input [id] = "'Name'+pointIndex" type = "text" formControlName = "CustomerName" (blur) = "ValidateValues(Customer)"> -->
+    <label for = "Name">Name:{{pointIndex+1}}</label><br>
+    <input id = "Name" type = "text" formControlName = "CustomerName" (blur) = "ValidateValues(Customer)">
+    <!-- <span  *ngIf="FormErrors.CustomerName"> -->
+        <span  *ngIf="CustomerDetails.get('CustomerName')?.touched||CustomerDetails.get('CustomerName')?.dirty">
+        <br>  {{FormErrors.CustomerName}}
+    </span>
+    </div>
+
+    <div [ngClass]="{'has-error' : FormErrors.Age}">    
+        <!-- <label [attr.for] = "'Age'+pointIndex">Age:</label><br>
+    <input [id] = "'Age'+pointIndex" type = "text" formControlName = "Age" (blur) = "ValidateValues(Customer)"> -->
+    <label for = "Age">Age:</label><br>
+    <input id = "Age" type = "text" formControlName = "Age" (blur) = "ValidateValues(Customer)">
+     <!-- <span  *ngIf="FormErrors.Age">  -->
+        <span  *ngIf="CustomerDetails.get('Age')?.touched||CustomerDetails.get('Age')?.dirty">
+  
+        <br>  {{FormErrors.Age}}
+    </span>
+    </div>
+</div>
+
+</div>
+
+<br><br>
+<div class = "panel-footer">
+    <div class = "btn-toolbar">
+        <!-- in order to validate the fields then enable the submit button -->
+          <button class = "btn btn-primary" type = "submit" [disabled] = "Customer.invalid">submit</button>
+          <!-- <button class = "btn btn-primary" type = "button" (click) = "Loaddata()"> load Data</button> -->
+    </div>
+</div>
+{{ this.Customer.value | json }}
+</form>
