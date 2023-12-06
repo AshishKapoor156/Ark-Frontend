@@ -271,7 +271,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  //onchoice valiation
+  //onchoice valiation for email textbox
   PreferedValidation(selectedvalue: string): void {
     // console.log("Inside PreferedValidation " + selectedvalue);
     const controlname = this.Customer.get('Customeremail');

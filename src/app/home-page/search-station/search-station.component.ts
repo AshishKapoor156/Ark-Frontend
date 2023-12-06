@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { HomePageModule } from '../home-page.module';
+import { HomeComponent } from '../home/home.component';
 
 @Component({
   selector: 'app-search-station',
@@ -17,3 +18,4 @@ export class SearchStationComponent extends HomeComponent implements OnInit {
   }
 
 }
+
